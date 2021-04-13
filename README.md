@@ -1,5 +1,5 @@
 # Tarification-Assurance-Vie
-Exercice 4:Enoncé
+# Exercice 4: Enoncé
 Un contrat prévoit le versement de C$ dans n années si le souscripteur âgé aujourd’hui de x ans est
 vivant à cette date, et la somme C0$; au moment du décès à un bénéficiaire désigné si le souscripteur décède avant
 n années. On utilise un taux d’actualisation de 2:5%.
@@ -24,7 +24,7 @@ mathématique commerciale, à la kème année
 4. Créez une interface VBA qui calcule la prime annuelle commerciale et les provisions mathématiques
 commerciales PMk en fonction de C, C0, n , g1, g2, a et x
 
-Exercice 2:Enoncé
+# Exercice 2:Enoncé
 Un contrat d’assurance vie différée n année est émis à (x). La prestation de décès C $, est payable
 au moment du décès si le décès survient après la période différée (après n années). Les primes annuelles P sont
 payables en début d’année pendant la période différée (pendant les n premières années). Si l’assuré décède dans
@@ -39,7 +39,7 @@ j ≤ i , où i est le taux d’intérêt utilisé pour évaluer la prime.
 Objectif:Créez une interface VBA qui calcule la prime mensuelle pure P et les provisions mathématiques pure au
 kème mois.
 
-Exercice 1:Enoncé
+# Exercice 1:Enoncé
 Un contrat EPARGNE RETRAITE a pour objet :
 1. La constitution d’une épargne par capitalisation, moyennant le versement de cotisations périodiques fixes,
 en vue de servir ultérieurement une retraite sous forme de capital ou de rente ;
