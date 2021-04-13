@@ -1,0 +1,340 @@
+# Prime pure Unique  et provisions Mathmatiques(sans frais de gestion ) 
+Private Sub BtCalculer_Click()
+Dim ligne As Integer: ligne = 2
+Dim prime1 As Double
+Dim prime2 As Double
+Dim i As Integer
+Dim A As Integer
+Dim B As Integer
+A = ageBox.Text
+B = nBox.Text
+
+D = ((1 / (1 + 0.025)) ^ (A)) * Feuil1.Cells(A + ligne, 2)
+
+Dn = ((1 / (1 + 0.025)) ^ (A + B)) * Feuil1.Cells(A + B + ligne, 2)
+
+
+prime1 = CBox.Text * Dn / D
+'-----------------------------------------------'
+
+Mx = ((1 / (1 + 0.025)) ^ (A + 0.5)) * (Feuil1.Cells(A + ligne, 2) - Feuil1.Cells(A + ligne + 1, 2))
+
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + 0.5)) * (Feuil1.Cells(i + ligne, 2) - Feuil1.Cells(i + ligne + 1, 2))
+
+Loop
+
+Mn = ((1 / (1 + 0.025)) ^ (A + B + 0.5)) * (Feuil1.Cells(A + ligne + B, 2) - Feuil1.Cells(A + ligne + 1 + B, 2))
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + B + 0.5)) * (Feuil1.Cells(i + B + ligne, 2) - Feuil1.Cells(i + B + ligne + 1, 2))
+
+Loop
+prime2 = C2Box.Text * (Mx - Mn) / D
+
+primelabel.Caption = prime1 + prime2
+
+'----------------------'
+
+' prevision
+
+k = Kbox.Text
+Dim Pk As Double
+
+If k > B Then
+Pk = 0
+Else
+Dxk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+
+Mk = ((1 / (1 + 0.025)) ^ (A + k + 0.5)) * (Feuil1.Cells(A + k + ligne, 2) - Feuil1.Cells(ligne + A + k + 1, 2))
+
+Do While (i < 107)
+
+i = i + 1
+Mk = Mk + ((1 / (1 + 0.025)) ^ (i + k + 0.5)) * (Feuil1.Cells(i + ligne + k, 2) - Feuil1.Cells(i + ligne + 1 + k, 2))
+
+Loop
+
+
+Pk = (C2Box.Text * (Mk - Mn) / Dxk) + (CBox.Text * Dn / Dxk)
+End If
+
+prévisionlabel.Caption = Pk
+
+End Sub
+
+# Prime pure Annuelle  et provisions  Mathmatiques (sans frais de gestion ) 
+Private Sub BtCalculer_Click()
+
+Dim ligne As Integer: ligne = 2
+Dim prime1 As Double
+Dim prime2 As Double
+Dim i As Integer
+
+A = ageBox.Text
+B = nBox.Text
+
+'----------------prime anuuele d'une assurance différé------------------------------'
+
+D = ((1 / (1 + 0.025)) ^ (A)) * Feuil1.Cells(A + ligne, 2)
+
+Dn = ((1 / (1 + 0.025)) ^ (A + B)) * Feuil1.Cells(A + B + ligne, 2)
+
+Nx = D
+
+i = A
+
+Do While (i < 107)
+i = i + 1
+Nx = Nx + ((1 / (1 + 0.025)) ^ (i)) * Feuil1.Cells(i + ligne, 2)
+Loop
+
+Nn = Dn
+
+Do While (i < 107)
+i = i + 1
+Nn = Nn + ((1 / (1 + 0.025)) ^ (i + B)) * Feuil1.Cells(i + B + ligne, 2)
+Loop
+
+
+prime1 = CBox.Text * Dn / (Nx - Nn)
+
+'----------------prime anuuele d'une assurance temporaire au moment du décès------------------------------'
+
+Mx = ((1 / (1 + 0.025)) ^ (A + 0.5)) * (Feuil1.Cells(A + ligne, 2) - Feuil1.Cells(A + ligne + 1, 2))
+
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + 0.5)) * (Feuil1.Cells(i + ligne, 2) - Feuil1.Cells(i + ligne + 1, 2))
+
+Loop
+
+Mn = ((1 / (1 + 0.025)) ^ (A + B + 0.5)) * (Feuil1.Cells(A + ligne + B, 2) - Feuil1.Cells(A + ligne + 1 + B, 2))
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + B + 0.5)) * (Feuil1.Cells(i + B + ligne, 2) - Feuil1.Cells(i + B + ligne + 1, 2))
+
+Loop
+prime2 = C2Box.Text * (Mx - Mn) / (Nx - Nn)
+'-------------------------------------------
+primelabel.Caption = prime1 + prime2
+
+'----------------------'
+
+' prevision
+
+k = Kbox.Text
+Dim Pk As Double
+
+If k > B Then
+Pk = 0
+Else
+Dxk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+
+Mk = ((1 / (1 + 0.025)) ^ (A + k + 0.5)) * (Feuil1.Cells(A + k + ligne, 2) - Feuil1.Cells(ligne + A + k + 1, 2))
+
+Do While (i < 107)
+i = i + 1
+Mk = Mk + ((1 / (1 + 0.025)) ^ (i + k + 0.5)) * (Feuil1.Cells(i + ligne + k, 2) - Feuil1.Cells(i + ligne + 1 + k, 2))
+Loop
+
+Nxk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+
+Do While (i < 107)
+i = i + 1
+Nxk = Nxk + ((1 / (1 + 0.025)) ^ (i + k + 1)) * Feuil1.Cells(i + k + ligne, 2)
+Loop
+
+Pk = (C2Box.Text * (Mk - Mn) / Dxk) + (CBox.Text * Dn / Dxk) - ((prime1 + prime2) * (Nxk - Nn) / Dxk)
+End If
+prévisionlabel.Caption = Pk
+End Sub
+
+# Prime pure commerciale  et provisions  Mathmatiques 
+Private Sub BtCalculer_Click()
+Dim ligne As Integer: ligne = 2
+Dim prime1 As Double
+Dim prime2 As Double
+Dim i As Integer
+Dim A As Integer
+Dim B As Integer
+A = ageBox.Text
+B = nBox.Text
+Alpha = acquitionBox
+
+
+D = ((1 / (1 + 0.025)) ^ (A)) * Feuil1.Cells(A + ligne, 2)
+
+Dn = ((1 / (1 + 0.025)) ^ (A + B)) * Feuil1.Cells(A + B + ligne, 2)
+Nx = D
+
+i = A
+
+Do While (i < 107)
+i = i + 1
+Nx = Nx + ((1 / (1 + 0.025)) ^ (i)) * Feuil1.Cells(i + ligne, 2)
+Loop
+
+Nn = Dn
+
+Do While (i < 107)
+i = i + 1
+Nn = Nn + ((1 / (1 + 0.025)) ^ (i + B)) * Feuil1.Cells(i + B + ligne, 2)
+Loop
+
+prime1 = CBox.Text * Dn / D
+'-----------------------------------------------'
+
+Mx = ((1 / (1 + 0.025)) ^ (A + 0.5)) * (Feuil1.Cells(A + ligne, 2) - Feuil1.Cells(A + ligne + 1, 2))
+
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + 0.5)) * (Feuil1.Cells(i + ligne, 2) - Feuil1.Cells(i + ligne + 1, 2))
+
+Loop
+
+Mn = ((1 / (1 + 0.025)) ^ (A + B + 0.5)) * (Feuil1.Cells(A + ligne + B, 2) - Feuil1.Cells(A + ligne + 1 + B, 2))
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + B + 0.5)) * (Feuil1.Cells(i + B + ligne, 2) - Feuil1.Cells(i + B + ligne + 1, 2))
+
+Loop
+prime2 = C2Box.Text * (Mx - Mn) / D
+prime3 = C2Box.Text * (g2Box.Text / 100) * (Nx - Nn) / D
+
+primelabel.Caption = (prime1 + prime2 + prime3) / (1 - Alpha / 100)
+
+'----------------------'
+
+' prevision
+
+k = Kbox.Text
+Dim Pk As Double
+
+If k > B Then
+Pk = 0
+Else
+Dxk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+
+Mk = ((1 / (1 + 0.025)) ^ (A + k + 0.5)) * (Feuil1.Cells(A + k + ligne, 2) - Feuil1.Cells(ligne + A + k + 1, 2))
+
+Do While (i < 107)
+
+i = i + 1
+Mk = Mk + ((1 / (1 + 0.025)) ^ (i + k + 0.5)) * (Feuil1.Cells(i + ligne + k, 2) - Feuil1.Cells(i + ligne + 1 + k, 2))
+
+Loop
+Nk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+Do While (i < 107)
+i = i + 1
+Nn = Nn + ((1 / (1 + 0.025)) ^ (i + k)) * Feuil1.Cells(i + k + ligne, 2)
+Loop
+
+Pk = (C2Box.Text * (Mk - Mn) / Dxk) + (CBox.Text * Dn / Dxk) + (C2Box.Text * (Nk - Nn) / Dxk)
+End If
+prévisionlabel.Caption = Pk
+End Sub
+
+# Prime pure commercial Annuelle et provisions  Mathmatiques 
+Private Sub BtCalculer_Click()
+
+Dim ligne As Integer: ligne = 2
+Dim prime1 As Double
+Dim prime2 As Double
+Dim i As Integer
+Dim A As Integer
+Dim B As Integer
+A = ageBox.Text
+B = nBox.Text
+Alpha = acquitionBox
+
+
+D = ((1 / (1 + 0.025)) ^ (A)) * Feuil1.Cells(A + ligne, 2)
+
+Dn = ((1 / (1 + 0.025)) ^ (A + B)) * Feuil1.Cells(A + B + ligne, 2)
+Nx = D
+
+i = A
+
+Do While (i < 107)
+i = i + 1
+Nx = Nx + ((1 / (1 + 0.025)) ^ (i)) * Feuil1.Cells(i + ligne, 2)
+Loop
+
+Nn = Dn
+
+Do While (i < 107)
+i = i + 1
+Nn = Nn + ((1 / (1 + 0.025)) ^ (i + B)) * Feuil1.Cells(i + B + ligne, 2)
+Loop
+
+prime1 = CBox.Text * Dn / D
+'-----------------------------------------------'
+
+Mx = ((1 / (1 + 0.025)) ^ (A + 0.5)) * (Feuil1.Cells(A + ligne, 2) - Feuil1.Cells(A + ligne + 1, 2))
+
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + 0.5)) * (Feuil1.Cells(i + ligne, 2) - Feuil1.Cells(i + ligne + 1, 2))
+
+Loop
+
+Mn = ((1 / (1 + 0.025)) ^ (A + B + 0.5)) * (Feuil1.Cells(A + ligne + B, 2) - Feuil1.Cells(A + ligne + 1 + B, 2))
+Do While (i < 107)
+i = i + 1
+
+Mx = Mx + ((1 / (1 + 0.025)) ^ (i + B + 0.5)) * (Feuil1.Cells(i + B + ligne, 2) - Feuil1.Cells(i + B + ligne + 1, 2))
+
+Loop
+prime2 = C2Box.Text * (Mx - Mn) / D
+Z = g2Box.Text
+Y = g1Box.Text
+prime3 = C2Box.Text * ((Z + Y) / 100) / D
+primeannuelcom = (prime1 + prime2) / ((1 - Alpha / 100) * (Nx - Nn)) + prime3
+
+primelabel.Caption = (prime1 + prime2) / ((1 - Alpha / 100) * (Nx - Nn)) + prime3
+'----------------------'
+
+' prevision
+
+k = Kbox.Text
+Dim Pk As Double
+
+If k > B Then
+Pk = 0
+Else
+Dxk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+
+Mk = ((1 / (1 + 0.025)) ^ (A + k + 0.5)) * (Feuil1.Cells(A + k + ligne, 2) - Feuil1.Cells(ligne + A + k + 1, 2))
+
+Do While (i < 107)
+
+i = i + 1
+Mk = Mk + ((1 / (1 + 0.025)) ^ (i + k + 0.5)) * (Feuil1.Cells(i + ligne + k, 2) - Feuil1.Cells(i + ligne + 1 + k, 2))
+
+Loop
+Nk = ((1 / (1 + 0.025)) ^ (A + k)) * Feuil1.Cells(A + k + ligne, 2)
+Do While (i < 107)
+i = i + 1
+Nn = Nn + ((1 / (1 + 0.025)) ^ (i + k)) * Feuil1.Cells(i + k + ligne, 2)
+Loop
+
+Pk = C2Box.Text * ((Mk - Mn) / Dxk + (Z + Y) / 100 * (Nk - Nn) / Dxk) + CBox.Text * Dn / Dxk + (Alpha / 100 - 1) * primeannuelcom * (Nk - Nn) / Dxk
+End If
+
+prévisionlabel.Caption = Pk
+End Sub
+
+
+
+
+
+
